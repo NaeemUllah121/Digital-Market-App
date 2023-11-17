@@ -1,0 +1,13 @@
+const appName = 'Aser Application';
+const startString = 'Start';
+const phoneNumberHint = 'Phone Number';
+const emailHint = 'Email';
+const nameHint = 'Full Name';
+const lastNameHint = 'Last Name';
+const passwordHint = "Password";
+const confirmPasswordHint = 'Confirm Password';
+const englishString = "ENGLISH";
+const urduSindiString = "URDU/SINDI/PASHTO";
+const mathString = "Math";
+const generalKnowledgeString = "General Knowledge";
+const startTextString = "START \n TEST";
