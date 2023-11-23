@@ -1,3 +1,4 @@
+import 'package:aser_application/controllers/LoginController.dart';
 import 'package:aser_application/screens/StartUp/SplashScreen.dart';
 import 'package:aser_application/screens/auth/signup/sign_up.dart';
 import 'package:aser_application/utill/constants.dart';
@@ -11,24 +12,10 @@ import 'package:get/get_core/src/get_main.dart';
 import '../../../utill/Colors.dart';
 import '../widgets/text_field.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
-
-  @override
-  State<LoginPage> createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
+class LoginPage extends GetView<LoginController> {
   final _formKey = GlobalKey<FormState>();
   bool isPasswordVisible = false;
-
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController =
-      TextEditingController();
-  final TextEditingController firstNameController = TextEditingController();
-  final TextEditingController lastNameController = TextEditingController();
-  final TextEditingController numberController = TextEditingController();
+  LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -82,9 +69,9 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                                 CustomTextField(
                                   inputLines: 1,
-                                  controller: emailController,
+                                  controller: controller.emailController.value,
                                   hintName: emailHint,
-                                  inputType: TextInputType.emailAddress,
+                                  // inputType: TextInputType.number,
                                   isPass: false,
                                 ),
                                 const SizedBox(
@@ -92,7 +79,7 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                                 CustomTextField(
                                   inputLines: 1,
-                                  controller: passwordController,
+                                  controller: controller.passwordController.value,
                                   hintName: passwordHint,
                                   inputType: TextInputType.visiblePassword,
                                   isPass: true,
@@ -155,13 +142,7 @@ class _LoginPageState extends State<LoginPage> {
                                           onPressed: () {
                                             if (_formKey.currentState!
                                                 .validate()) {
-                                              // registerController.createUser(
-                                              //     userName: firstNameController
-                                              //             .text +
-                                              //         lastNameController.text,
-                                              //     email: emailController.text,
-                                              //     password:
-                                              //         passwordController.text);
+                                              controller.login();
                                             }
                                           },
                                           child: Text(

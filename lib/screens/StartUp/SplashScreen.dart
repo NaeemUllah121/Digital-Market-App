@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:aser_application/screens/auth/login/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -22,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(
       const Duration(seconds: 3),
       () {
-        Get.to(const HomePage());
+        Get.to( LoginPage());
       },
     );
   }

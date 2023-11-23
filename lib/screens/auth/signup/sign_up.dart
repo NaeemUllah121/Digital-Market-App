@@ -1,5 +1,6 @@
+import 'package:aser_application/controllers/SignUpController.dart';
 import 'package:aser_application/screens/StartUp/SplashScreen.dart';
-import 'package:aser_application/screens/auth/login/login.dart';
+import 'package:aser_application/screens/auth/login/login_page.dart';
 import 'package:aser_application/utill/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -11,25 +12,11 @@ import 'package:get/get_core/src/get_main.dart';
 import '../../../utill/Colors.dart';
 import '../widgets/text_field.dart';
 
-class SignUpPage extends StatefulWidget {
-  const SignUpPage({super.key});
-
-  @override
-  State<SignUpPage> createState() => _SignUpPageState();
-}
-
-class _SignUpPageState extends State<SignUpPage> {
+class SignUpPage extends GetView<SignUpController> {
   final _formKey = GlobalKey<FormState>();
   bool isPasswordVisible = false;
   String? confirmPasswordValue;
-
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController =
-      TextEditingController();
-  final TextEditingController firstNameController = TextEditingController();
-  final TextEditingController lastNameController = TextEditingController();
-  final TextEditingController numberController = TextEditingController();
+  late String selectedProject;
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +70,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                 ),
                                 CustomTextField(
                                   inputLines: 1,
-                                  controller: firstNameController,
+                                  controller: controller.firstNameController,
                                   hintName: nameHint,
                                   inputType: TextInputType.name,
                                   isPass: false,
@@ -93,7 +80,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                 ),
                                 CustomTextField(
                                   inputLines: 1,
-                                  controller: emailController,
+                                  controller: controller.emailController,
                                   hintName: emailHint,
                                   inputType: TextInputType.emailAddress,
                                   isPass: false,
@@ -103,7 +90,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                 ),
                                 CustomTextField(
                                   inputLines: 1,
-                                  controller: numberController,
+                                  controller: controller.numberController,
                                   hintName: phoneNumberHint,
                                   inputType: TextInputType.number,
                                   isPass: false,
@@ -111,9 +98,64 @@ class _SignUpPageState extends State<SignUpPage> {
                                 const SizedBox(
                                   height: 20,
                                 ),
+                                Padding(
+                                  padding: EdgeInsets.only(left: 20, right: 20),
+                                  child: DropdownButtonFormField(
+                                    decoration: const InputDecoration(
+                                      enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(0)),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(0)),
+                                      ),
+                                      errorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(0)),
+                                      ),
+                                      focusedErrorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(0)),
+                                      ),
+                                      disabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(0)),
+                                      ),
+                                      filled: true,
+                                      fillColor: Colors.white,
+                                    ),
+                                    validator: (value) =>
+                                        value == null ? "Select a Type" : null,
+                                    dropdownColor: Colors.white,
+                                    hint: const Text("Select a Type"),
+                                    value: selectedProject,
+                                    onChanged: (String? newValue) {
+                                      controller.setUserType(newValue!);
+                                    },
+                                    items: <String>[
+                                      'Parent',
+                                      'Teacher',
+                                    ].map((String value) {
+                                      return DropdownMenuItem<String>(
+                                          enabled: true,
+                                          value: value,
+                                          child: Text(
+                                            value,
+                                            style: const TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 18),
+                                          ));
+                                    }).toList(),
+                                  ),
+                                ),
+
+                                const SizedBox(
+                                  height: 20,
+                                ),
                                 CustomTextField(
                                   inputLines: 1,
-                                  controller: passwordController,
+                                  controller: controller.passwordController,
                                   hintName: passwordHint,
                                   inputType: TextInputType.visiblePassword,
                                   isPass: true,
@@ -122,12 +164,13 @@ class _SignUpPageState extends State<SignUpPage> {
                                   height: 20,
                                 ),
                                 CustomTextField(
-                                    inputLines: 1,
-                                    controller: confirmPasswordController,
-                                    hintName: confirmPasswordHint,
-                                    inputType: TextInputType.visiblePassword,
-                                    isPass: true,
-                                  ),
+                                  inputLines: 1,
+                                  controller:
+                                      controller.confirmPasswordController,
+                                  hintName: confirmPasswordHint,
+                                  inputType: TextInputType.visiblePassword,
+                                  isPass: true,
+                                ),
                                 const SizedBox(
                                   height: 20,
                                 ),
