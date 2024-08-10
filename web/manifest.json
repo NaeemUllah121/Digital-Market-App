@@ -1,6 +1,6 @@
 {
-    "name": "aser_application",
-    "short_name": "aser_application",
+    "name": "digital_market",
+    "short_name": "digital_market",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

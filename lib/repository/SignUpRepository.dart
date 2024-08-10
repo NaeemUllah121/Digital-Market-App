@@ -1,29 +1,134 @@
-import 'dart:convert';
+// ignore_for_file: file_names
 
+import 'dart:convert';
+import 'package:digital_market/models/SignUpModel.dart';
+import 'package:digital_market/store/local_store.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-import '../models/LoginModel.dart';
 import '../utill/url_Paths.dart';
 import '../utill/url_base.dart';
 
-class SignUpRepository extends GetConnect{
-  Future<LoginModel> login(String number, String password) async {
-    final formData = {'mobile_number': number, 'password': password};
+class SignUpRepository extends GetConnect {
+  Future<SignUpModel> signUp(String fistName, String lastName, String email,
+      String number, String userType, String password) async {
+    final formData = {
+      'userName': fistName,
+      'mobile_number': number,
+      'user_type': userType,
+      'password': password
+    };
     final jsonData = jsonEncode(formData);
-
+    if (kDebugMode) {
+      print(jsonData);
+    }
     final response = await post(
-      BaseUrl.baseUrl + UrlPathHelper.getValue(UrlPath.login),
+      BaseUrl.baseUrl + UrlPathHelper.getValue(UrlPath.register),
+      json.decode(jsonData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    );
+    if (kDebugMode) {
+      (SignUpModel.fromJson(response.body));
+    }
+    return SignUpModel.fromJson(response.body);
+  }
+
+  Future<SignUpModel> changePassword(
+      String oldPassword, String newPassword) async {
+    final formData = {
+      'currentPassword': oldPassword,
+      'newPassword': newPassword,
+    };
+    final jsonData = jsonEncode(formData);
+    String accessToken = await LocalStore.instance.getAccessToken();
+    if (kDebugMode) {
+      print(jsonData);
+    }
+    if (kDebugMode) {
+      print(accessToken);
+    }
+    final response = await post(
+      BaseUrl.baseUrl + UrlPathHelper.getValue(UrlPath.changePassword),
+      json.decode(jsonData),
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": accessToken
+      },
+    );
+
+    if (kDebugMode) {
+      print(SignUpModel.fromJson(response.body));
+    }
+    return SignUpModel.fromJson(response.body);
+  }
+
+  Future<SignUpModel> verifyPin(String pin) async {
+    final formData = {
+      'code': pin,
+    };
+    final jsonData = jsonEncode(formData);
+    String accessToken = await LocalStore.instance.getAccessToken();
+    if (kDebugMode) {
+      print(jsonData);
+    }
+    if (kDebugMode) {
+      print(accessToken);
+    }
+    final response = await post(
+      BaseUrl.baseUrl + UrlPathHelper.getValue(UrlPath.verifyPin),
       json.decode(jsonData),
       headers: {
         "Content-Type": "application/json",
       },
     );
 
-    print(response.statusCode);
-    if (response.status.hasError) {
-      return Future.error(response.statusText.toString());
-    } else {
-      print(LoginModel.fromJson(response.body));
-      return LoginModel.fromJson(response.body);
+    if (kDebugMode) {
+      print(SignUpModel.fromJson(response.body));
     }
+    return SignUpModel.fromJson(response.body);
+  }
+
+  Future<SignUpModel> forgetPasswordRequest(String phoneNumber) async {
+    final formData = {
+      'number': phoneNumber,
+    };
+    final jsonData = jsonEncode(formData);
+    if (kDebugMode) {
+      print(jsonData);
+    }
+    final response = await post(
+      BaseUrl.baseUrl + UrlPathHelper.getValue(UrlPath.forgetPasswordRequest),
+      json.decode(jsonData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    );
+
+    if (kDebugMode) {
+      print(SignUpModel.fromJson(response.body));
+    }
+    return SignUpModel.fromJson(response.body);
+  }
+
+  Future<SignUpModel> forgetPasswordComplete(
+      String code, String password) async {
+    final formData = {'code': code, 'password': password};
+    final jsonData = jsonEncode(formData);
+    if (kDebugMode) {
+      print(jsonData);
+    }
+    final response = await post(
+      BaseUrl.baseUrl + UrlPathHelper.getValue(UrlPath.forgetPasswordComplete),
+      json.decode(jsonData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    );
+
+    if (kDebugMode) {
+      print(SignUpModel.fromJson(response.body));
+    }
+    return SignUpModel.fromJson(response.body);
   }
 }

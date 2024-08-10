@@ -1,4 +1,4 @@
-# aser_application
+# digital_market
 
 A new Flutter project.
 

@@ -1,7 +1,10 @@
+// ignore_for_file: file_names
+
 import 'dart:convert'; // Import the dart:convert library
-import 'package:aser_application/models/LoginModel.dart';
-import 'package:aser_application/utill/url_Paths.dart';
-import 'package:aser_application/utill/url_base.dart';
+import 'package:digital_market/models/LoginModel.dart';
+import 'package:digital_market/utill/url_Paths.dart';
+import 'package:digital_market/utill/url_base.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 class LoginRepository extends GetConnect {
@@ -16,14 +19,15 @@ class LoginRepository extends GetConnect {
         "Content-Type": "application/json",
       },
     );
+    if (kDebugMode) {
+      print(response.statusCode);
+    }
 
-    print(response.statusCode);
 
-    if (response.status.hasError) {
-      return Future.error(response.statusText.toString());
-    } else {
-      print(LoginModel.fromJson(response.body));
+      if (kDebugMode) {
+        print(LoginModel.fromJson(response.body));
+      }
       return LoginModel.fromJson(response.body);
     }
-  }
+
 }

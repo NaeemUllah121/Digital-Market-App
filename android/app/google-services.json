@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "816060514509",
+    "project_id": "digital-market-eadeb",
+    "storage_bucket": "digital-market-eadeb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:816060514509:android:ff78f0be38e189d100e984",
+        "android_client_info": {
+          "package_name": "com.example.digital_market"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "816060514509-puco18951v46pval6qq6j7fpt3otv07n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvqyifkoEShGFDQdaUl4taeUKMy_xqo7w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "816060514509-puco18951v46pval6qq6j7fpt3otv07n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

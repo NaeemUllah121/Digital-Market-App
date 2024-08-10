@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "aser_application" "\0"
+            VALUE "FileDescription", "digital_market" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "aser_application" "\0"
+            VALUE "InternalName", "digital_market" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2023 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "aser_application.exe" "\0"
-            VALUE "ProductName", "aser_application" "\0"
+            VALUE "OriginalFilename", "digital_market.exe" "\0"
+            VALUE "ProductName", "digital_market" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END
